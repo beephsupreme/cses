@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "solutions/weird_algorithm",
+    "solutions/missing_number",
+    "utils",
+]
+
+resolver = "2"
+

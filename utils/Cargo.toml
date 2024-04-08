@@ -1,0 +1,11 @@
+[package]
+name = "utils"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.44"
+thiserror = "1.0.30"
+log = "0.4.14"
+env_logger = "0.11.3"
+
