@@ -8,9 +8,11 @@
 
  use weird_algorithm::weird_algorithm;
  
+ /// Benchmark for the "Weird Algorithm" problem (https://cses.fi/problemset/task/1068)
+ /// Tests the performance of the algorithm for a large input.
  pub fn bench(c: &mut Criterion) {
-     c.bench_function("weird_algorithm::solve(7)", |b| {
-         b.iter(|| weird_algorithm(black_box(7)))
+     c.bench_function("weird_algorithm::solve(1000000)", |b| {
+         b.iter(|| weird_algorithm(black_box(1000000)))
      });
  }
  

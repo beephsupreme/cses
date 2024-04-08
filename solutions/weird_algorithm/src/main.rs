@@ -11,7 +11,7 @@ use anyhow::Error;
 use utils::io::{get_token, load_tokens, vector_to_string};
 use weird_algorithm::weird_algorithm;
 
-/// Driver for the "Weird Algorithm" problem https://cses.fi/problemset/task/1068
+// /// Driver for the "Weird Algorithm" problem (https://cses.fi/problemset/task/1068)
 fn main() -> Result<(), Error> {
     let reader = BufReader::new(std::io::stdin());
     let mut buffer: String = String::new();
