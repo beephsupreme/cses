@@ -1,10 +1,6 @@
 # Missing Number
 
-#### [Source Code](https://github.com/beephsupreme/cses-rust/blob/master/src/solutions/missing_number.rs)
-
-## Description
-
-#### [Source Code](https://github.com/beephsupreme/cses-rust/blob/master/src/solutions/missing_number.rs)
+[CSES Missing NUmber](https://cses.fi/problemset/task/1083)
 
 ## Description
 
@@ -28,7 +24,7 @@ Print a line that contains all values of `n` during the algorithm.
 
 Input
 
-```
+```no-run
 5  
 2 3 1 5
 ```
