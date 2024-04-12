@@ -1,13 +1,6 @@
-/*
- * Copyright (c) 2024 Michael N. Rowsey
- * Licensed under the MIT license (http://opensource.org/licenses/MIT)
- * This file may not be copied, modified, or distributed except according to those terms.
- */
 use std::str::{FromStr, SplitAsciiWhitespace};
 
-use anyhow::{bail, Result};
-
-use crate::error::CsesError;
+use crate::prelude::*;
 
 /// Converts a vector of type T to a string.
 /// # Arguments
@@ -31,30 +24,37 @@ pub fn vector_to_string<T: ToString>(v: Vec<T>, sep: Option<&str>) -> String {
 /// * `n` - The number of lines to read.
 /// # Returns
 /// A Result containing a vector of tuples of type (u64, u64) or an error.
-pub fn get_tuple_vector(n: u64) -> Vec<(u64, u64)> {
-    (0..n)
-        .map(|_| {
-            let mut input = String::new();
-            std::io::stdin().read_line(&mut input).unwrap();
-            let mut it = input.split_ascii_whitespace();
-            (
-                it.next().unwrap().parse().unwrap(),
-                it.next().unwrap().parse().unwrap(),
-            )
-        })
-        .collect()
+pub fn get_tuple_vector(n: u64) -> Result<Vec<(u64, u64)>> {
+    let mut v: Vec<(u64, u64)> = Vec::new();
+    for _ in 0..n {
+        let mut input = String::new();
+        std::io::stdin().read_line(&mut input)?;
+        let mut it = input.split_ascii_whitespace();
+        let token = it.next().unwrap();
+        let a: u64 = match token.parse() {
+            Ok(r) => r,
+            Err(_) => return Err(Error::ParseError(format!("get_tuple_vector: {}", token))),
+        };
+        let token = it.next().unwrap();
+        let b: u64 = match token.parse() {
+            Ok(r) => r,
+            Err(_) => return Err(Error::ParseError(format!("get_tuple_vector: {}", token))),
+        };
+        v.push((a, b));
+    }
+    Ok(v)
 }
 
 /// # get_vector_vector_bool()
 /// Reads 8 lines from standard input and parses them into a vector of vectors of bool.
 /// # Returns
 /// A Result containing a vector of vectors of bool or an error.
-pub fn get_vector_vector_bool() -> Vec<Vec<bool>> {
+pub fn get_vector_vector_bool() -> Result<Vec<Vec<bool>>> {
     let mut v: Vec<Vec<bool>> = Vec::new();
     let mut b: Vec<bool> = Vec::new();
     for _ in 0..8 {
         let mut input: String = String::new();
-        std::io::stdin().read_line(&mut input).unwrap();
+        std::io::stdin().read_line(&mut input)?;
         let chars = input.chars();
         for c in chars {
             b.push(c == '.');
@@ -62,7 +62,7 @@ pub fn get_vector_vector_bool() -> Vec<Vec<bool>> {
         v.push(b.clone());
         b.clear();
     }
-    v
+    Ok(v)
 }
 
 /// Parses a token into a type T.
@@ -74,12 +74,12 @@ pub fn get_token<T: FromStr>(tokens: &mut SplitAsciiWhitespace) -> Result<T> {
     if let Some(token) = tokens.next() {
         match token.parse::<T>() {
             Ok(r) => Ok(r),
-            Err(_) => bail!(CsesError::ParseError(format!("get_token: {}", token))),
+            Err(_) => Err(Error::ParseError(format!("get_token: {}", token))),
         }
     } else {
-        bail!(CsesError::ParseError(
-            "get_token(): expected Some, got None".to_string()
-        ));
+        Err(Error::ParseError(
+            "get_token(): expected Some, got None".to_string(),
+        ))
     }
 }
 
@@ -117,10 +117,7 @@ pub fn get_vector<T: FromStr>(tokens: &mut SplitAsciiWhitespace) -> Result<Vec<T
     for token in tokens.by_ref() {
         match token.parse::<T>() {
             Ok(r) => v.push(r),
-            Err(_) => bail!(CsesError::ParseError(format!(
-                "vector_from_tokens: {}",
-                token
-            ))),
+            Err(_) => return Err(Error::ParseError(format!("vector_from_tokens: {}", token))),
         }
     }
     Ok(v)

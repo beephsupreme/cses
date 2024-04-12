@@ -1,5 +1,5 @@
-use std::io::{BufRead, BufReader};
 use std::fmt::Write;
+use std::io::{BufRead, BufReader};
 
 fn main() {
     let mut buffer: String = String::new();

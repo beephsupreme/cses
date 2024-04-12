@@ -1,9 +1,26 @@
-[workspace]
-members = [
-    "solutions/weird_algorithm",
-    "solutions/missing_number",
-    "utils",
-]
+[package]
+name = "cses"
+version = "0.1.0"
+edition = "2021"
+default-run = "welcome"
 
-resolver = "2"
+[dependencies]
+thiserror = "1"
+
+[dev-dependencies]
+log = "0"
+env_logger = "0"
+anyhow = "1"
+criterion = "0"
+
+[[bench]]
+name = "weird_algorithm_bench"
+
+[[bench]]
+name = "missing_number_bench"
+
+[[bench]]
+name = "repetitions_bench"
+
+
 
