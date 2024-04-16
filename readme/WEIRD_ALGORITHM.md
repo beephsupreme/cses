@@ -1,6 +1,8 @@
 # Weird Algorithm
 
-[CSES Weird Algorithm](https://cses.fi/problemset/task/1068)
+[Weird Algorithm @ CSES Website](https://cses.fi/problemset/task/1068)  
+[Source Code (lib)](https://github.com/beephsupreme/cses/blob/master/src/weird_algorithm.rs)  
+[Source Code (submission)](https://github.com/beephsupreme/cses/blob/master/src/bin/submissions/weird_algorithm_sub.rs)
 
 ## Description
 

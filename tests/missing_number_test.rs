@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2024 Michael N. Rowsey
- * Licensed under the MIT license (http://opensource.org/licenses/MIT)
- * This file may not be copied, modified, or distributed except according to those terms.
- */
-
 use std::fs::File;
 use std::io::BufReader;
 
@@ -15,10 +9,14 @@ use cses::missing_number::missing_number;
 use cses::utils::get_test_filenames;
 
 #[cfg(test)]
+
+/// Runs the missing number problem from CSES Problem Set.
+/// Uses the same data files as the CSES Grader.
 #[test]
 fn missing_number_integration() -> Result<()> {
     env_logger::init();
-    let (questions, answers) = get_test_filenames()?;
+    let mut loc = "missing_number".to_string();
+    let (questions, answers) = get_test_filenames(&mut loc)?;
     for i in 0..questions.len() {
         info!("{}: {}", i + 1, questions[i]);
         let mut q_reader = BufReader::new(File::open(&questions[i])?);
@@ -30,7 +28,7 @@ fn missing_number_integration() -> Result<()> {
         let n: u64 = get_token(&mut q_tokens)?;
         let v: Vec<u64> = get_vector(&mut q_tokens)?;
         let a: u64 = get_token(&mut a_tokens)?;
-        let r: u64 = missing_number(n, v)?;
+        let r: u64 = missing_number(n, v);
         assert_eq!(a, r);
     }
     Ok(())

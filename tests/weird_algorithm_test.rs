@@ -8,10 +8,15 @@ use cses::io::{get_token, get_vector, load_all_tokens};
 use cses::utils::get_test_filenames;
 use cses::weird_algorithm::weird_algorithm;
 
+#[cfg(test)]
+
+/// Runs the weird algorithm problem from CSES Problem Set.
+/// Uses the same data files as the CSES Grader.
 #[test]
 fn weird_algorithm_integration() -> Result<()> {
     env_logger::init();
-    let (questions, answers) = get_test_filenames()?;
+    let mut loc = "weird_algorithm".to_string();
+    let (questions, answers) = get_test_filenames(&mut loc)?;
     for i in 0..questions.len() {
         info!("{}: {}", i + 1, questions[i]);
         let mut q_reader = BufReader::new(File::open(&questions[i])?);
@@ -22,7 +27,7 @@ fn weird_algorithm_integration() -> Result<()> {
         let mut a_tokens = load_all_tokens(&mut a_reader, &mut a_buffer)?;
         let n: u64 = get_token(&mut q_tokens)?;
         let a: Vec<u64> = get_vector(&mut a_tokens)?;
-        let r: Vec<u64> = weird_algorithm(n)?;
+        let r: Vec<u64> = weird_algorithm(n);
         assert_eq!(a, r);
     }
     Ok(())

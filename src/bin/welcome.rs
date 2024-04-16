@@ -1,12 +1,14 @@
-fn main() {
-    let mut binaries = ["repetitions", "missing_number", "weird_algorithm"];
-    binaries.sort();
-    println!("\nCSES Rust Solutions");
-    println!("===================");
+use cses::prelude::*;
+use cses::utils::get_binary_filenames;
+
+fn main() -> Result<()> {
+    let filenames = get_binary_filenames()?;
+    println!("\nCSES Rust Solutions\n===================");
     println!("Use the `--bin` option to specify a binary");
     println!("Available binaries:");
-    for binary in binaries.iter() {
-        println!("  {}", binary);
+    for filename in filenames {
+        println!("  {}", filename);
     }
     println!();
+    Ok(())
 }
