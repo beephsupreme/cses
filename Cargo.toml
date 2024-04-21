@@ -21,6 +21,9 @@ harness = false
 name = "missing_number_bench"
 harness = false
 
+[[bench]]
+name = "number_spiral_bench"
+harness = false
 
 [[bench]]
 name = "permutations_bench"
