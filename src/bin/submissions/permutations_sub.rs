@@ -1,22 +1,25 @@
 use std::fmt::Write;
 use std::io::{BufRead, BufReader};
+use std::ptr::write;
 
 fn main() {
-    let mut buffer: String = String::new();
-    let mut reader = BufReader::new(std::io::stdin());
-    reader.read_line(&mut buffer).unwrap();
-    let mut n: u64 = buffer.trim().parse().unwrap();
-    buffer.clear();
-    loop {
-        write!(buffer, "{} ", n).unwrap();
-        if n == 1 {
-            break;
+    let stdin = std::io::stdin();
+    let reader = BufReader::new(stdin.lock());
+    let n: u64 = reader.lines().next().unwrap().unwrap().parse().unwrap();
+    let mut output = String::new();
+    match n {
+        1 => Some(vec![1]),
+        0 | 2 | 3 => println!("NO SOLUTION"),
+        _ => {
+            let mut v: Vec<u64> = Vec::with_capacity(n as usize);
+            let half = n / 2;
+            for i in 0..half {
+                write!(output, "{} ", 2 * i + 2).unwrap();
+            }
+            for i in 0..n - half {
+                write!(output, "{} ", 2 * i + 1).unwrap();
+            }
         }
-        if n % 2 == 0 {
-            n /= 2;
-        } else {
-            n = 3 * n + 1;
-        }
-    }
-    println!("{}", buffer.trim());
+    };
+    println!("{}", output);
 }

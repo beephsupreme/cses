@@ -23,6 +23,10 @@ harness = false
 
 
 [[bench]]
+name = "permutations_bench"
+harness = false
+
+[[bench]]
 name = "repetitions_bench"
 harness = false
 

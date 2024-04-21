@@ -1,6 +1,8 @@
 # Missing Number
 
-[CSES Missing NUmber](https://cses.fi/problemset/task/1083)
+[CSES Missing Number](https://cses.fi/problemset/task/1083)
+[Source Code (lib)](https://github.com/beephsupreme/cses/blob/master/src/missing_number.rs)
+[Source Code (submission)](https://github.com/beephsupreme/cses/blob/master/src/bin/submissions/missing_number_sub.rs)
 
 ## Description
 
@@ -24,10 +26,10 @@ Print a line that contains all values of `n` during the algorithm.
 
 Input
 
-```no-run
-5  
+```
+5
 2 3 1 5
 ```
 
-Output  
+Output
 `4`
