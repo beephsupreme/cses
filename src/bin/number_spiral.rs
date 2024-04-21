@@ -5,9 +5,9 @@ use std::fs::File;
 #[allow(unused_imports)]
 use std::io::{BufReader, Cursor, Stdin};
 
+use cses::io::vector_to_string;
 use cses::number_spiral::*;
 use cses::prelude::*;
-use cses::io::vector_to_string;
 
 /// Select a Reader type to use for the input.
 fn main() -> Result<()> {

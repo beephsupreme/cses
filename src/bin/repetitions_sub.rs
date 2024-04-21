@@ -1,10 +1,13 @@
+//! repetitions problem from CSES problem set (https://cses.fi/problemset/task/1069)
+
 pub fn main() {
-    let mut buffer = String::new();
-    std::io::stdin().read_line(&mut buffer).unwrap();
+    let mut buffer: String = String::new();
+    let mut reader = std::io::BufReader::new(std::io::stdin());
+    std::io::BufRead::read_line(&mut reader, &mut buffer).unwrap();
     let buffer: String = buffer.trim().to_string();
-    let mut streak = 1u64;
-    let mut longest = 1u64;
-    let mut prev = b'@';
+    let mut streak: u64 = 1;
+    let mut longest: u64 = 1;
+    let mut prev: u8 = b'@';
     buffer.as_bytes().iter().for_each(|&ch| match ch == prev {
         true => {
             streak += 1;

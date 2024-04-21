@@ -29,7 +29,7 @@ pub fn number_spiral(n: u64, v: Vec<(u64, u64)>) -> Vec<u64> {
 }
 
 /// get a tuple of (u64, Vec<(u64, u64)>) from stdin
-pub fn number_spiral_get_input<R>(reader: R) -> Result<(u64, Vec<(u64, u64)>)> 
+pub fn number_spiral_get_input<R>(reader: R) -> Result<(u64, Vec<(u64, u64)>)>
 where
     R: std::io::BufRead,
 {
@@ -137,11 +137,11 @@ mod tests {
         assert!(r.is_err());
     }
 
-
     #[test]
     fn number_spiral_validate_input_err_vector_element_too_large() {
         let n: u64 = 5;
-        let r = validate_number_spiral_input(n, &[(1, 1), (1, 1), (1, 1), (1_000_000_001, 1), (1, 1)]);
+        let r =
+            validate_number_spiral_input(n, &[(1, 1), (1, 1), (1, 1), (1_000_000_001, 1), (1, 1)]);
         assert!(r.is_err());
     }
 }

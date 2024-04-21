@@ -1,14 +1,12 @@
-use std::fmt::Write;
-use std::io::{BufRead, BufReader};
+//! number spiral problem from CSES problem set (https://cses.fi/problemset/task/1068)
 
 fn main() {
     let mut buffer: String = String::new();
-    let mut reader = BufReader::new(std::io::stdin());
-    reader.read_line(&mut buffer).unwrap();
+    let mut reader = std::io::BufReader::new(std::io::stdin());
+    std::io::BufRead::read_line(&mut reader, &mut buffer).unwrap();
     let mut n: u64 = buffer.trim().parse().unwrap();
-    buffer.clear();
     loop {
-        write!(buffer, "{} ", n).unwrap();
+        print!("{} ", n);
         if n == 1 {
             break;
         }
