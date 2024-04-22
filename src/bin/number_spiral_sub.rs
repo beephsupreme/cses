@@ -14,10 +14,9 @@ fn main() {
         let max = u64::max(a, b);
         let d = 1 + max * (max - 1);
         if max & 1 == 0 {
-           println!("{}", d + a - b);
+            println!("{}", d + a - b);
         } else {
-             println!("{}", d + b - a);
+            println!("{}", d + b - a);
         }
     }
 }
-

@@ -1,4 +1,4 @@
-//! missing number problem from CSES problem set (https://cses.fi/problemset/task/1072)
+//! two knights problem from CSES problem set (https://cses.fi/problemset/task/1072)
 pub fn main() {
     let mut buffer: String = String::new();
     let mut reader = std::io::BufReader::new(std::io::stdin());
