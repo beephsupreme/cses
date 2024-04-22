@@ -1,12 +1,11 @@
 //! increasing array problem from CSES problem set (https://cses.fi/problemset/task/1094)
 
-use std::io::{BufRead, BufReader};
 fn main() {
     let mut buffer: String = String::new();
-    let mut reader = BufReader::new(std::io::stdin());
-    reader.read_line(&mut buffer).unwrap();
+    let mut reader = std::io::BufReader::new(std::io::stdin());
+    std::io::BufRead::read_line(&mut reader, &mut buffer).unwrap();
     buffer.clear();
-    reader.read_line(&mut buffer).unwrap();
+    std::io::BufRead::read_line(&mut reader, &mut buffer).unwrap();
     let v: Vec<u64> = buffer
         .split_whitespace()
         .map(|x| x.parse::<u64>().unwrap())
