@@ -4,7 +4,8 @@ fn main() {
     let mut reader = std::io::BufReader::new(std::io::stdin());
     std::io::BufRead::read_line(&mut reader, &mut buffer).unwrap();
     let n: u64 = buffer.trim().parse().unwrap();
-    let (mut a, mut b) = (Vec::new(), Vec::new());
+    let mut _a: Vec<u64> = Vec::new();
+    let mut _b: Vec<u64> = Vec::new();
     let mut sum = n * (n + 1) / 2;
     if sum % 2 != 0 {
         println!("NO");
