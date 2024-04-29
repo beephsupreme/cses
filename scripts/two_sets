@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin two_sets < data/two_sets_input.txt
