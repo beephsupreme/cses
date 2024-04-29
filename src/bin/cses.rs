@@ -9,7 +9,7 @@ fn main() {
             continue;
         }
         let file = p.path().display().to_string();
-        if !file.contains("rustes") && file.contains(".rs") {
+        if !file.contains("cses") && file.contains(".rs") {
             let filename = file
                 .strip_prefix("./src/bin/")
                 .unwrap()

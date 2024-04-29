@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin palindrome_reorder < data/palindrome_reorder_input.txt
