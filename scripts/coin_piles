@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin coin_piles < data/coin_piles_input.txt

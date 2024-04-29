@@ -1,23 +1,39 @@
-//! Driver for the "Repetitions" problem (https://cses.fi/problemset/task/1069)
+use std::io::{BufReader, Read};
+use std::str::SplitAsciiWhitespace;
 
-#[allow(unused_imports)]
-use std::fs::File;
-#[allow(unused_imports)]
-use std::io::{BufReader, Cursor};
+fn main() {
+    let mut buffer: String = String::new();
+    let mut tokens = load_tokens(&mut buffer);
+    let input: String = get_token(&mut tokens);
+    let mut streak: u64 = 1;
+    let mut longest: u64 = 1;
+    let mut prev: u8 = b'@';
+    input.as_bytes().iter().for_each(|&ch| match ch == prev {
+        true => {
+            streak += 1;
+            longest = std::cmp::max(longest, streak);
+        }
+        false => {
+            streak = 1;
+            prev = ch;
+        }
+    });
+    println!("{longest}");
+}
 
-use cses::io::get_value;
-use cses::prelude::*;
-use cses::repetitions::*;
+fn get_token<T: std::str::FromStr>(tokens: &mut SplitAsciiWhitespace) -> T {
+    if let Some(token) = tokens.next() {
+        match token.parse::<T>() {
+            Ok(r) => r,
+            Err(_) => panic!("PARSE ERROR"),
+        }
+    } else {
+        panic!("EXPECTED SOME, GOT NONE");
+    }
+}
 
-/// Select a Reader type to use for the input.
-fn main() -> Result<()> {
-    #![allow(unused_variables)]
-    // let filename = "./data/repetitions/test_input_002.txt".to_string();
-    // let input: String = get_value(BufReader::new(File::open(filename)?))?;
-    // let inupt: String = get_value(Cursor::new("AAAGGTCC\n"))?;
-    let input: String = get_value(BufReader::new(std::io::stdin()))?;
-    validate_repetitions_input(&input)?;
-    let r: u64 = repetitions(input);
-    println!("{}", r);
-    Ok(())
+fn load_tokens(buffer: &mut String) -> SplitAsciiWhitespace {
+    let mut reader = BufReader::new(std::io::stdin());
+    reader.read_to_string(buffer).expect("READ ERROR");
+    buffer.split_ascii_whitespace()
 }

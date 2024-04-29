@@ -1,31 +1,41 @@
-//! Driver for the "Permutations" problem (https://cses.fi/problemset/task/1070)
+use std::fmt::Write;
+use std::io::{BufReader, Read};
+use std::str::SplitAsciiWhitespace;
 
-#[allow(unused_imports)]
-use std::fs::File;
-#[allow(unused_imports)]
-use std::io::{BufReader, Cursor};
-
-use cses::io::{get_value, vector_to_string};
-use cses::permutations::*;
-#[allow(unused_imports)]
-use cses::prelude::*;
-
-/// Select a Reader type to use for the input.
-fn main() -> Result<()> {
-    #![allow(unused_variables)]
-    // let filename = "./data/permutations/test_input_002.txt".to_string();
-    // let n: u64 = get_value(BufReader::new(File::open(filename)?))?;
-    // let n: u64 = get_value(Cursor::new("5\n"))?;
-    let n = get_value(BufReader::new(std::io::stdin()))?;
-    validate_permutations_input(n)?;
-    let r: Vec<u64> = match permutations(n) {
-        Some(v) => v,
-        None => {
-            println!("NO SOLUTION");
-            return Ok(());
+fn main() {
+    let mut buffer = String::new();
+    let mut tokens = load_tokens(&mut buffer);
+    let n: u64 = get_token(&mut tokens);
+    buffer.clear();
+    match n {
+        1 => println!("1"),
+        0 | 2 | 3 => write!(buffer, "NO SOLUTION").unwrap(),
+        _ => {
+            let half = n / 2;
+            for i in 0..half {
+                write!(buffer, "{} ", 2 * i + 2).unwrap();
+            }
+            for i in 0..n - half {
+                write!(buffer, "{} ", 2 * i + 1).unwrap();
+            }
         }
     };
-    let s: String = vector_to_string(r, Some(" "));
-    println!("{}", s);
-    Ok(())
+    println!("{buffer}");
+}
+
+fn get_token<T: std::str::FromStr>(tokens: &mut SplitAsciiWhitespace) -> T {
+    if let Some(token) = tokens.next() {
+        match token.parse::<T>() {
+            Ok(r) => r,
+            Err(_) => panic!("PARSE ERROR"),
+        }
+    } else {
+        panic!("EXPECTED SOME, GOT NONE");
+    }
+}
+
+fn load_tokens(buffer: &mut String) -> SplitAsciiWhitespace {
+    let mut reader = BufReader::new(std::io::stdin());
+    reader.read_to_string(buffer).expect("READ ERROR");
+    buffer.split_ascii_whitespace()
 }

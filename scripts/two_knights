@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin two_knights < data/two_knights_input.txt

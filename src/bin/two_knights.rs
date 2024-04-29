@@ -5,20 +5,12 @@ use std::str::SplitAsciiWhitespace;
 fn main() {
     let mut buffer = String::new();
     let mut tokens = load_tokens(&mut buffer);
-    let mut n: u64 = get_token(&mut tokens);
+    let n: i64 = get_token(&mut tokens);
     buffer.clear();
-    loop {
-        write!(buffer, "{} ", n).unwrap();
-        if n == 1 {
-            break;
-        }
-        if n % 2 == 0 {
-            n /= 2;
-        } else {
-            n = 3 * n + 1;
-        }
+    for i in 1..=n {
+        writeln!(buffer, "{}", (i.pow(4) - 9 * i.pow(2) + 24 * i - 16) / 2).unwrap();
     }
-    println!("{}", buffer.trim());
+    print!("{}", buffer);
 }
 
 fn get_token<T: std::str::FromStr>(tokens: &mut SplitAsciiWhitespace) -> T {

@@ -1,24 +1,16 @@
-use std::fmt::Write;
 use std::io::{BufReader, Read};
 use std::str::SplitAsciiWhitespace;
 
 fn main() {
     let mut buffer = String::new();
     let mut tokens = load_tokens(&mut buffer);
-    let mut n: u64 = get_token(&mut tokens);
-    buffer.clear();
-    loop {
-        write!(buffer, "{} ", n).unwrap();
-        if n == 1 {
-            break;
-        }
-        if n % 2 == 0 {
-            n /= 2;
-        } else {
-            n = 3 * n + 1;
-        }
+    let n: u64 = get_token(&mut tokens);
+    let mut result: u64 = 1;
+    for _ in 1..=n {
+        result *= 2;
+        result %= 1000000007;
     }
-    println!("{}", buffer.trim());
+    println!("{}", result);
 }
 
 fn get_token<T: std::str::FromStr>(tokens: &mut SplitAsciiWhitespace) -> T {

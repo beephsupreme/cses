@@ -1,23 +1,30 @@
-//! Driver for the missing number problem from CSES problem set (https://cses.fi/problemset/task/1083).
+use std::io::{BufReader, Read};
+use std::str::SplitAsciiWhitespace;
 
-#[allow(unused_imports)]
-use std::fs::File;
-#[allow(unused_imports)]
-use std::io::{BufReader, Cursor, Stdin};
+fn main() {
+    let mut buffer = String::new();
+    let mut tokens = load_tokens(&mut buffer);
+    let n: u64 = get_token(&mut tokens);
+    let mut sum = n * (n + 1) / 2;
+    for _ in 0..n - 1 {
+        sum -= get_token::<u64>(&mut tokens);
+    }
+    println!("{sum}");
+}
 
-use cses::io::get_value_and_vector;
-use cses::missing_number::*;
-use cses::prelude::*;
+fn get_token<T: std::str::FromStr>(tokens: &mut SplitAsciiWhitespace) -> T {
+    if let Some(token) = tokens.next() {
+        match token.parse::<T>() {
+            Ok(r) => r,
+            Err(_) => panic!("PARSE ERROR"),
+        }
+    } else {
+        panic!("EXPECTED SOME, GOT NONE");
+    }
+}
 
-/// Select a Reader type to use for the input.
-fn main() -> Result<()> {
-    #![allow(unused_variables)]
-    // let filename = "./data/missing_number/test_input_002.txt".to_string();
-    // let (n, v) = get_value_and_vector(BufReader::new(File::open(filename)?))?;
-    // let (n, v) = get_value_and_vector(Cursor::new("5\n2 3 4 5\n"))?;
-    let (n, v) = get_value_and_vector(BufReader::new(std::io::stdin()))?;
-    validate_missing_number_input(n, &v)?;
-    let r: u64 = missing_number(n, v);
-    println!("{}", r);
-    Ok(())
+fn load_tokens(buffer: &mut String) -> SplitAsciiWhitespace {
+    let mut reader = BufReader::new(std::io::stdin());
+    reader.read_to_string(buffer).expect("READ ERROR");
+    buffer.split_ascii_whitespace()
 }

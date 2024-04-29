@@ -1,23 +1,39 @@
-//! Driver for the number spiral problem from CSES problem set (https://cses.fi/problemset/task/1071).
+use std::fmt::Write;
+use std::io::{BufReader, Read};
+use std::str::SplitAsciiWhitespace;
 
-#[allow(unused_imports)]
-use std::fs::File;
-#[allow(unused_imports)]
-use std::io::{BufReader, Cursor, Stdin};
+fn main() {
+    let mut buffer = String::new();
+    let mut output = String::new();
+    let mut tokens = load_tokens(&mut buffer);
+    let n: u64 = get_token(&mut tokens);
+    for _ in 0..n {
+        let a: u64 = get_token(&mut tokens);
+        let b: u64 = get_token(&mut tokens);
+        let max = u64::max(a, b);
+        let d = 1 + max * (max - 1);
+        if max & 1 == 0 {
+            writeln!(output, "{}", d + a - b).unwrap();
+        } else {
+            writeln!(output, "{}", d + b - a).unwrap();
+        }
+    }
+    println!("{}", output);
+}
 
-use cses::io::vector_to_string;
-use cses::number_spiral::*;
-use cses::prelude::*;
+fn get_token<T: std::str::FromStr>(tokens: &mut SplitAsciiWhitespace) -> T {
+    if let Some(token) = tokens.next() {
+        match token.parse::<T>() {
+            Ok(r) => r,
+            Err(_) => panic!("PARSE ERROR"),
+        }
+    } else {
+        panic!("EXPECTED SOME, GOT NONE");
+    }
+}
 
-/// Select a Reader type to use for the input.
-fn main() -> Result<()> {
-    #![allow(unused_variables)]
-    // let filename = "./data/number_spiral/test_input_002.txt".to_string();
-    // let (n, v) = number_spiral_get_input(BufReader::new(File::open(filename)?))?;
-    // let (n, v) = number_spiral_get_input(Cursor::new("5\n2 3 4 5\n"))?;
-    let (n, v) = number_spiral_get_input(BufReader::new(std::io::stdin()))?;
-    validate_number_spiral_input(n, &v)?;
-    let r: Vec<u64> = number_spiral(n, v);
-    println!("{}", vector_to_string(r, Some("\n")));
-    Ok(())
+fn load_tokens(buffer: &mut String) -> SplitAsciiWhitespace {
+    let mut reader = BufReader::new(std::io::stdin());
+    reader.read_to_string(buffer).expect("READ ERROR");
+    buffer.split_ascii_whitespace()
 }

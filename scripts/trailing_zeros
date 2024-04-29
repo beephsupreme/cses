@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin trailing_zeros < data/trailing_zeros_input.txt

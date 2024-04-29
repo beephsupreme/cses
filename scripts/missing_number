@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin missing_number < data/missing_number_input.txt

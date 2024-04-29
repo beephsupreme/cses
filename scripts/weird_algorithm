@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin weird_algorithm < data/weird_algorithm_input.txt

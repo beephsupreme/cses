@@ -1,40 +1,9 @@
 [package]
-name = "cses"
+name = "rustes"
 version = "0.1.0"
 edition = "2021"
-default-run = "welcome"
+default-run = "rustes"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-thiserror = "1"
-
-[dev-dependencies]
-anyhow = "1"
-criterion = { version = "0", features = ["html_reports"] }
-env_logger = "0"
-log = "0"
-
-[[bench]]
-name = "increasing_array_bench"
-harness = false
-
-[[bench]]
-name = "missing_number_bench"
-harness = false
-
-[[bench]]
-name = "number_spiral_bench"
-harness = false
-
-[[bench]]
-name = "permutations_bench"
-harness = false
-
-[[bench]]
-name = "repetitions_bench"
-harness = false
-
-[[bench]]
-name = "weird_algorithm_bench"
-harness = false
-
-

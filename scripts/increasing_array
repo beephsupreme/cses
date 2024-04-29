@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin increasing_array < data/increasing_array_input.txt
