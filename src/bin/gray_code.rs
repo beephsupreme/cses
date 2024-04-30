@@ -10,10 +10,9 @@ fn main() {
     for i in 0..(1 << n) {
         let gray_code = i ^ (i >> 1);
         write!(buffer, "{:0width$b}\n", gray_code, width = n).unwrap();
-    } 
+    }
     println!("{}", buffer);
 }
-
 
 fn get_token<T: std::str::FromStr>(tokens: &mut SplitAsciiWhitespace) -> T {
     if let Some(token) = tokens.next() {
@@ -31,4 +30,3 @@ fn load_tokens(buffer: &mut String) -> SplitAsciiWhitespace {
     reader.read_to_string(buffer).expect("READ ERROR");
     buffer.split_ascii_whitespace()
 }
-
