@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin gray_code < data/gray_code_input.txt
