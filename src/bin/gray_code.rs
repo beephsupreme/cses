@@ -9,7 +9,7 @@ fn main() {
     buffer.clear();
     for i in 0..(1 << n) {
         let gray_code = i ^ (i >> 1);
-        write!(buffer, "{:0width$b}\n", gray_code, width = n).unwrap();
+        writeln!(buffer, "{:0width$b}", gray_code, width = n).unwrap();
     }
     println!("{}", buffer);
 }

@@ -11,7 +11,7 @@ fn main() {
     let (mut a, mut b) = (Vec::new(), Vec::new());
     let mut sum = n * (n + 1) / 2;
     if sum % 2 != 0 {
-        println!("{}", "NO");
+        println!("NO");
         return;
     } else {
         sum /= 2;
