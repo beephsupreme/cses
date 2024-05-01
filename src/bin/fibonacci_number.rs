@@ -4,62 +4,26 @@ use std::{
     str::SplitAsciiWhitespace,
 };
 
-const    MOD: u64 = 1_000_000_007;
-const      K: u64 = 2;
+const MOD: u64 = 1_000_000_007;
 
 fn main() {
-    let a = Matrix::new(0, 1, 1, 1);
-    
-    
-    let b = a * a * a;
-    let c = a.pow(3);
-    println!("{:?}", b);
-    println!("{:?}", c);
-
-    // let mut buffer = String::new();
-    // let mut tokens = load_tokens(&mut buffer);
-    // let mut n: u64 = get_token(&mut tokens);
-    // n = n % PISANO;
-    // let mut p = 0;
-    // let mut c = 1;
-    // let mut t;
-    // if n == 0 || n == 1 {
-    //     println!("{}", n);
-    //   return
-    // }
-    // for _ in 0..n-1 {
-    //     t = c;
-    //     c = (p + c) % MOD;
-    //     p = t;
-    // }
-    // println!("{}", c % MOD);
+    let mut buffer = String::new();
+    let mut tokens = load_tokens(&mut buffer);
+    let n: u64 = get_token(&mut tokens);
+    println!("{}", fib(n));
 }
 
-// // returns the N-th term of Fibonacci sequence
-// int fib(int N)
-// {
-//     // create vector F1
-//     vector<ll> F1(K+1);
-//     F1[1] = 1;
-//     F1[2] = 1;
-
-//     // create matrix T
-//     matrix T(K+1, vector<ll>(K+1));
-//     T[1][1] = 0, T[1][2] = 1;
-//     T[2][1] = 1, T[2][2] = 1;
-
-//     // raise T to the (N-1)th power
-//     if (N == 1)
-//         return 1;
-//     T = pow(T, N-1);
-
-//     // the answer is the first row of T . F1
-//     ll res = 0;
-//     REP(i, K)
-//         res = (res + T[1][i] * F1[i]) % MOD;
-//     return res;
-// }
-
+fn fib(n: u64) -> u64 {
+    let mut t = Matrix::new(0, 1, 1, 1);
+    if n == 0 {
+        return 0;
+    }
+    if n == 1 {
+        return 1;
+    }
+    t = t.pow(n - 1);
+    (t.rows[0][0] + t.rows[0][1]) % MOD
+}
 
 #[derive(Clone, Copy, Debug)]
 struct Matrix {
@@ -71,6 +35,17 @@ impl Matrix {
         Matrix {
             rows: [[a, c], [b, d]],
         }
+    }
+
+    fn pow(self, n: u64) -> Self {
+        if n == 1 {
+            return self;
+        }
+        if n % 2 == 1 {
+            return self * self.pow(n - 1);
+        }
+        let res = self.pow(n / 2);
+        res * res
     }
 }
 
@@ -86,19 +61,6 @@ impl Mul for Matrix {
             }
         }
         res
-    }
-}
-
-impl Matrix {
-    fn pow(self, n: u64) -> Self {
-        if n == 1 {
-            return self;
-        }
-        if n % 2 == 1 {
-            return self * self.pow(n - 1);
-        }
-        let res = self.pow(n / 2);
-        res * res
     }
 }
 
