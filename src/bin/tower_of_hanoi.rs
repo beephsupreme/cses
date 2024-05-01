@@ -10,7 +10,8 @@ fn main() {
     hanoi(n, 1, 3, &mut v);
     buffer.clear();
     writeln!(buffer, "{}", v.len()).unwrap();
-    v.iter().for_each(|(a, b)| writeln!(buffer, "{} {}", a, b).unwrap());
+    v.iter()
+        .for_each(|(a, b)| writeln!(buffer, "{} {}", a, b).unwrap());
     print!("{}", buffer)
 }
 
