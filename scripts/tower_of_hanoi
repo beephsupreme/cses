@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin tower_of_hanoi < data/tower_of_hanoi_input.txt
