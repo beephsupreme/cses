@@ -1,39 +1,34 @@
-use std::fmt::Write;
 use std::io::{BufReader, Read};
-use std::str::SplitAsciiWhitespace;
+use std::collections::VecDeque;
 
 fn main() {
-    let mut buffer = String::new();
-    let mut tokens = load_tokens(&mut buffer);
-    let mut n: u64 = get_token(&mut tokens);
-    buffer.clear();
-    loop {
-        write!(buffer, "{} ", n).unwrap();
-        if n == 1 {
-            break;
-        }
-        if n % 2 == 0 {
-            n /= 2;
-        } else {
-            n = 3 * n + 1;
-        }
+    let mut tokens = Scanner::default();
+    let n: u64 = tokens.next();
+    let modulo = 1_000_000_007;
+    let mut result = 1;
+    for _ in 0..n {
+        result = (result * 2) % modulo;
     }
-    println!("{}", buffer.trim());
+    println!("{}", result);    
 }
 
-fn get_token<T: std::str::FromStr>(tokens: &mut SplitAsciiWhitespace) -> T {
-    if let Some(token) = tokens.next() {
-        match token.parse::<T>() {
-            Ok(r) => r,
-            Err(_) => panic!("PARSE ERROR"),
-        }
-    } else {
-        panic!("EXPECTED SOME, GOT NONE");
-    }
+#[derive(Default)]
+struct Scanner {
+    buffer: VecDeque<String>,
 }
-
-fn load_tokens(buffer: &mut String) -> SplitAsciiWhitespace {
-    let mut reader = BufReader::new(std::io::stdin());
-    reader.read_to_string(buffer).expect("READ ERROR");
-    buffer.split_ascii_whitespace()
+impl Scanner {
+    fn next<T: std::str::FromStr>(&mut self) -> T {
+        loop {
+            if let Some(token) = self.buffer.pop_front() {
+                return token.parse().ok().expect("PARSE ERROR");
+            }
+            let mut input = String::new();
+            let mut reader = BufReader::new(std::io::stdin());
+            reader.read_to_string(&mut input).expect("READ ERROR");
+            self.buffer = input
+                .split_ascii_whitespace()
+                .map(String::from)
+                .collect();
+        }
+    }
 }
