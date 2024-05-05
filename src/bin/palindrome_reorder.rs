@@ -1,9 +1,12 @@
-use std::fmt::Write;
+use std::{
+    collections::VecDeque,
+    fmt::Write,
+    io::{BufReader, Read},
+};
 
 fn main() {
-    let mut input: String = String::new();
-    std::io::stdin().read_line(&mut input).unwrap();
-    input = input.trim().to_string();
+    let mut tokens = Scanner::default();
+    let input: String = tokens.next();
     let mut freq: [u64; 26] = [0; 26];
     let mut middle: Option<u8> = None;
 
@@ -38,4 +41,22 @@ fn main() {
 
     write!(output, "{}", back).unwrap();
     println!("{}", output);
+}
+
+#[derive(Default)]
+struct Scanner {
+    buffer: VecDeque<String>,
+}
+impl Scanner {
+    fn next<T: std::str::FromStr>(&mut self) -> T {
+        loop {
+            if let Some(token) = self.buffer.pop_front() {
+                return token.parse().ok().expect("PARSE ERROR");
+            }
+            let mut input = String::new();
+            let mut reader = BufReader::new(std::io::stdin());
+            reader.read_to_string(&mut input).expect("READ ERROR");
+            self.buffer = input.split_ascii_whitespace().map(String::from).collect();
+        }
+    }
 }

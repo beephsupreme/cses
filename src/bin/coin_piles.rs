@@ -31,10 +31,7 @@ impl Scanner {
             let mut input = String::new();
             let mut reader = BufReader::new(std::io::stdin());
             reader.read_to_string(&mut input).expect("READ ERROR");
-            self.buffer = input
-                .split_ascii_whitespace()
-                .map(String::from)
-                .collect();
+            self.buffer = input.split_ascii_whitespace().map(String::from).collect();
         }
     }
 }

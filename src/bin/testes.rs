@@ -1,15 +1,23 @@
 use std::collections::VecDeque;
+use std::fmt::Write;
 use std::io::{BufReader, Read};
 
 fn main() {
     let mut tokens = Scanner::default();
-    let n: u64 = tokens.next();
-    let modulo = 1_000_000_007;
-    let mut result = 1;
-    for _ in 0..n {
-        result = (result * 2) % modulo;
+    let mut n: u64 = tokens.next();
+    let mut buffer = String::new();
+    loop {
+        write!(buffer, "{} ", n).unwrap();
+        if n == 1 {
+            break;
+        }
+        if n % 2 == 0 {
+            n /= 2;
+        } else {
+            n = 3 * n + 1;
+        }
     }
-    println!("{}", result);
+    println!("{}", buffer.trim());
 }
 
 #[derive(Default)]

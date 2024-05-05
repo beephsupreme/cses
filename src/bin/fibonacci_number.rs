@@ -14,12 +14,12 @@ fn main() {
 
 fn fib(n: u64) -> u64 {
     match n {
-        0 => return 0,
-        1 => return 1,
+        0 => 0,
+        1 => 1,
         _ => {
             let t = Matrix(0, 1, 1, 1);
             let t = pow(t, n - 1);
-            return t.3 % MOD;            
+            t.3 % MOD
         }
     }
 }
@@ -34,7 +34,7 @@ impl std::ops::Mul for Matrix {
             (self.0 * rhs.0 + self.1 * rhs.2) % MOD,
             (self.0 * rhs.1 + self.1 * rhs.3) % MOD,
             (self.2 * rhs.0 + self.3 * rhs.2) % MOD,
-            (self.2 * rhs.1 + self.3 * rhs.3) % MOD
+            (self.2 * rhs.1 + self.3 * rhs.3) % MOD,
         )
     }
 }
@@ -64,10 +64,7 @@ impl Scanner {
             let mut input = String::new();
             let mut reader = BufReader::new(std::io::stdin());
             reader.read_to_string(&mut input).expect("READ ERROR");
-            self.buffer = input
-                .split_ascii_whitespace()
-                .map(String::from)
-                .collect();
+            self.buffer = input.split_ascii_whitespace().map(String::from).collect();
         }
     }
 }
