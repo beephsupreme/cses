@@ -1,15 +1,9 @@
-use std::{
-    collections::VecDeque,
-    io::{BufReader, BufWriter, Read, Write},
-};
-
 const MOD: u64 = 1_000_000_007;
 
 fn main() {
     let mut tokens = Scanner::default();
-    let out = &mut BufWriter::new(std::io::stdout());
     let n: u64 = tokens.next();
-    writeln!(out, "{}", fib(n)).unwrap();
+    println!("{}", fib(n));
 }
 
 fn fib(n: u64) -> u64 {
@@ -53,7 +47,7 @@ fn pow(mut a: Matrix, mut n: u64) -> Matrix {
 
 #[derive(Default)]
 struct Scanner {
-    buffer: VecDeque<String>,
+    buffer: std::collections::VecDeque<String>,
 }
 impl Scanner {
     fn next<T: std::str::FromStr>(&mut self) -> T {
@@ -62,8 +56,8 @@ impl Scanner {
                 return token.parse().ok().expect("PARSE ERROR");
             }
             let mut input = String::new();
-            let mut reader = BufReader::new(std::io::stdin());
-            reader.read_to_string(&mut input).expect("READ ERROR");
+            let mut reader = std::io::BufReader::new(std::io::stdin());
+            std::io::Read::read_to_string(&mut reader, &mut input).expect("READ ERROR");
             self.buffer = input.split_ascii_whitespace().map(String::from).collect();
         }
     }

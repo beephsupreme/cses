@@ -35,7 +35,7 @@ fn main() {
 
 #[derive(Default)]
 struct Scanner {
-    buffer: VecDeque<String>,
+    buffer: std::collections::VecDeque<String>,
 }
 impl Scanner {
     fn next<T: std::str::FromStr>(&mut self) -> T {
@@ -44,8 +44,8 @@ impl Scanner {
                 return token.parse().ok().expect("PARSE ERROR");
             }
             let mut input = String::new();
-            let mut reader = BufReader::new(std::io::stdin());
-            reader.read_to_string(&mut input).expect("READ ERROR");
+            let mut reader = std::io::BufReader::new(std::io::stdin());
+            std::io::Read::read_to_string(&mut reader, &mut input).expect("READ ERROR");
             self.buffer = input.split_ascii_whitespace().map(String::from).collect();
         }
     }
