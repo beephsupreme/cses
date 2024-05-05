@@ -1,8 +1,4 @@
-use std::{
-    collections::VecDeque,
-    fmt::Write,
-    io::{BufReader, Read},
-};
+use std::fmt::Write;
 
 fn main() {
     let mut tokens = Scanner::default();

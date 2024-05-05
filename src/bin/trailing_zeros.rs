@@ -1,6 +1,3 @@
-use std::collections::VecDeque;
-use std::io::{BufReader, Read};
-
 fn main() {
     let mut tokens = Scanner::default();
     let n: u64 = tokens.next();

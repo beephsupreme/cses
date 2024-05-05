@@ -1,17 +1,12 @@
 // Problem: Weird Algorithm
-
+use std::fmt::Write;
 
 fn main() {
-    let scan = Scanner::default();
-    let mut out = std::io::BufWriter::new(std::io::stdout().lock());
-    solve(scan, &mut out);
-}
-
-fn solve<W: std::io::Write>(mut scan: Scanner, out: &mut W) {
+    let mut scan = Scanner::default();
     let mut n: u64 = scan.next();
-    let mut v: Vec<u64> = Vec::new();
+    let mut buffer = String::new();
     loop {
-        v.push(n);
+        write!(buffer, "{} ", n).unwrap();
         if n == 1 {
             break;
         }
@@ -21,20 +16,14 @@ fn solve<W: std::io::Write>(mut scan: Scanner, out: &mut W) {
             n = 3 * n + 1;
         }
     }
-    writeln!(
-        out,
-        "{}",
-        v.iter()
-            .map(|x| x.to_string())
-            .collect::<Vec<String>>()
-            .join(" ")
-    )
-    .ok();
+    println!("{}", buffer.trim());
 }
+
 #[derive(Default)]
 struct Scanner {
     buffer: std::collections::VecDeque<String>,
 }
+
 impl Scanner {
     fn next<T: std::str::FromStr>(&mut self) -> T {
         loop {

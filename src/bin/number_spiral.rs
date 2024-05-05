@@ -1,6 +1,4 @@
-use std::collections::VecDeque;
 use std::fmt::Write;
-use std::io::{BufReader, Read};
 
 fn main() {
     let mut output = String::new();
