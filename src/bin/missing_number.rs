@@ -16,7 +16,7 @@ impl Scanner {
     fn next<T: std::str::FromStr>(&mut self) -> T {
         loop {
             if let Some(token) = self.buffer.pop_front() {
-                return token.parse().ok().expect("PARSE ERROR");
+                return token.parse().ok().expect("PARSE ERROR").unwrap();
             }
             let mut input = String::new();
             let mut reader = std::io::BufReader::new(std::io::stdin());
