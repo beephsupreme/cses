@@ -1,0 +1,2 @@
+#!/bin/sh
+cargo run -q --bin digit_queries < data/digit_queries_input.txt
