@@ -1,16 +1,16 @@
 const BOARD_SIZE: usize = 8;
-
+ 
 fn main() {
     let mut tokens = Scanner::default();
-    let mut board: Vec<Vec<bool>> = Vec::new();
+    let mut board: Vec<Vec<bool>> = Vec::new(); 
     for _ in 0..BOARD_SIZE {
         let line: String = tokens.next();
-        let v: Vec<bool> = line.trim().chars().map(|c| c == '.').collect();
+        let v: Vec<bool> = line.trim().chars().map(|c|c=='.').collect();
         board.push(v);
     }
-    println!("{}", solve(0, &mut [0usize; 8], &board));
+     println!("{}", solve(0, &mut [0usize; 8], &board));
 }
-
+ 
 fn solve(c: usize, p: &mut [usize; 8], b: &Vec<Vec<bool>>) -> u64 {
     if c == 8 {
         return 1_u64;
