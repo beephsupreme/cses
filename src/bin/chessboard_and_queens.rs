@@ -1,13 +1,14 @@
 const BOARD_SIZE: usize = 8;
  
 fn main() {
-    let board: Vec<Vec<bool>> = io::stdin()
-        .lock()
-        .lines()
-        .take(BOARD_SIZE)
-        .map(|line| line.unwrap().trim().chars().map(|c| c == '.').collect())
-        .collect();
-    println!("{}", solve(0, &mut [0usize; 8], &board));
+    let mut tokens = Scanner::default();
+    let mut board: Vec<Vec<bool>> = Vec::new(); 
+    for _ in 0..BOARD_SIZE {
+        let line: String = tokens.next();
+        let v: Vec<bool> = line.trim().chars().map(|c|c=='.').collect();
+        board.push(v);
+    }
+     println!("{}", solve(0, &mut [0usize; 8], &board));
 }
  
 fn solve(c: usize, p: &mut [usize; 8], b: &Vec<Vec<bool>>) -> u64 {
