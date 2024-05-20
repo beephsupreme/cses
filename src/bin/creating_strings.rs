@@ -33,7 +33,7 @@ fn next_permutation(v: &mut [char]) -> bool {
     }
     false
 }
- 
+
 #[derive(Default)]
 struct Scanner {
     buffer: std::collections::VecDeque<String>,
@@ -51,4 +51,3 @@ impl Scanner {
         }
     }
 }
-

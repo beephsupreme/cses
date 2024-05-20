@@ -9,7 +9,7 @@ fn main() {
     let n: i64 = v.iter().sum();
     println!("{}", solve(&v, v[0], 0, 1, n, n >> 1));
 }
- 
+
 fn solve(v: &[i64], a: i64, b: i64, i: usize, n: i64, m: i64) -> i64 {
     match m {
         q if a >= q => return i64::abs(n - (a << 1)),
@@ -40,5 +40,3 @@ impl Scanner {
         }
     }
 }
-
-
