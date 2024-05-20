@@ -1,0 +1,3 @@
+
+#!/bin/sh
+cargo run -q --bin chessboard_and_queens < data/chessboard_and_queens_input.txt
