@@ -2,7 +2,7 @@ use std::fmt::Write;
 
 fn main() {
     let mut tokens = Scanner::default();
-    let mut output: String = String::new();
+    let mut out: String = String::new();
     let m: i64 = tokens.next();
     for _ in 0..m {
         let mut n: i64 = tokens.next();
@@ -20,9 +20,9 @@ fn main() {
         n -= 1;
         let result: i64 = t.pow(c as u32 - 1) + n / c;
         let s = result.to_string().chars().nth((n % c) as usize).unwrap();
-        writeln!(output, "{}", s).unwrap();
+        writeln!(out, "{}", s).unwrap();
     }
-    println!("{}", output);
+    println!("{}", out);
 }
 
 #[derive(Default)]
